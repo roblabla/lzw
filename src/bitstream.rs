@@ -1,6 +1,5 @@
 //! This module provides bit readers and writers
-
-use std::io::{self, Write};
+use io::{self, Write};
 
 /// Containes either the consumed bytes and reconstructed bits or
 /// only the consumed bytes if the supplied buffer was not bit enough

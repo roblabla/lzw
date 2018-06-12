@@ -4,8 +4,10 @@
 // See http://www.cplusplus.com/articles/iL18T05o/ for his extensive explanations
 // and a C++ implementatation
 
-use std::io;
-use std::io::{Read, Write};
+use io;
+use io::Read;
+use alloc::*;
+use alloc::boxed::Box;
 
 use bitstream::{Bits, BitReader, BitWriter};
 
@@ -65,7 +67,7 @@ impl DecodingDict {
                 }
                 None => return Err(io::Error::new(
                     io::ErrorKind::InvalidInput,
-                    &*format!("Invalid code {:X}, expected code <= {:X}", k, self.table.len())
+                    Box::new(format!("Invalid code {:X}, expected code <= {:X}", k, self.table.len()))
                 ))
             }
             self.buffer.push(cha);
@@ -74,7 +76,7 @@ impl DecodingDict {
             if self.buffer.len() >= MAX_ENTRIES { 
                 return Err(io::Error::new(
                     io::ErrorKind::InvalidInput,
-                    "Invalid code sequence. Cycle in decoding table."
+                    Box::new("Invalid code sequence. Cycle in decoding table.")
                 ))
             }
             //(code, cha) = self.table[k as usize];
@@ -166,10 +168,10 @@ impl<R> $name<R> where R: BitReader {
                     if code > next_code {
                         return Err(io::Error::new(
                             io::ErrorKind::InvalidInput,
-                            &*format!("Invalid code {:X}, expected code <= {:X}",
+                            Box::new(format!("Invalid code {:X}, expected code <= {:X}",
                                       code,
                                       next_code
-                            )
+                            ))
                         ))
                     }
                     let prev = self.prev;

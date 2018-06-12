@@ -22,6 +22,11 @@
 //!         enc.encode_bytes(data).unwrap();
 //!     }
 
+#![no_std]
+#![feature(alloc)]
+extern crate alloc;
+
+pub mod io;
 mod lzw;
 mod bitstream;
 
