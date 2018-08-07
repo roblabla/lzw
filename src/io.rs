@@ -1,5 +1,4 @@
-use alloc::*;
-use alloc::boxed::Box;
+use alloc::prelude::*;
 use core::fmt;
 
 /// A specialized [`Result`](../result/enum.Result.html) type for I/O
