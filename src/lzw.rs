@@ -6,7 +6,8 @@
 
 use io;
 use io::Read;
-use alloc::prelude::*;
+use alloc::vec::Vec;
+use alloc::boxed::Box;
 
 use bitstream::{Bits, BitReader, BitWriter};
 
